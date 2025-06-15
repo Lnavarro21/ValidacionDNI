@@ -52,5 +52,20 @@ namespace ValidacionDNI_Backend.Controllers
                 return StatusCode(500, new { IdTipoMensaje = 1, Message = ex.Message });
             }
         }
+        [HttpGet("listaTipoDocumento")]
+        public async Task<ActionResult<TipoDocumentoLista>> ListarTipoDocumento()
+        {
+            try
+            {
+                var resultado = await vgDataAccess.ListaDocumentoAsync();
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al listar tipo de documento");
+                return StatusCode(500, "Ocurrió un error interno al procesar la solicitud.");
+            }
+        }
+
     }
 }

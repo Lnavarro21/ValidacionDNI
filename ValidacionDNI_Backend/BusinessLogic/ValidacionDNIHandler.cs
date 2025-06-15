@@ -32,5 +32,23 @@ namespace ValidacionDNI_Backend.BusinessLogic
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<TipoDocumentoLista> ListaDocumentoAsync()
+        {
+            try
+            {
+
+                TipoDocumentoLista Respuesta = null;
+
+                Respuesta = await vgDataAccess.ListaDocumento();
+
+                return Respuesta;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

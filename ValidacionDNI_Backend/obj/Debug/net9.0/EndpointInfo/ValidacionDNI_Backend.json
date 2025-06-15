@@ -35,6 +35,35 @@
           }
         }
       }
+    },
+    "/api/ValidacionDNI/listaTipoDocumento": {
+      "get": {
+        "tags": [
+          "ValidacionDNI"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoDocumentoLista"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoDocumentoLista"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TipoDocumentoLista"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -64,6 +93,37 @@
           },
           "celular": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoDocumento": {
+        "type": "object",
+        "properties": {
+          "idDocumento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documento": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombreCortoDocumento": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TipoDocumentoLista": {
+        "type": "object",
+        "properties": {
+          "lista": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TipoDocumento"
+            },
             "nullable": true
           }
         },

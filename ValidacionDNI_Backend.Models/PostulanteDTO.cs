@@ -16,4 +16,15 @@ namespace ValidacionDNI_Backend.Models
         public string Celular {  get; set; }
     }
 
+    public class TipoDocumentoLista
+    {
+        public List<TipoDocumento> Lista { get; set; }
+    }
+    public class TipoDocumento
+    {
+        public int IdDocumento { get; set; }
+        public string Documento { get; set; }
+        public string NombreCortoDocumento { get; set; }
+    }
+
 }

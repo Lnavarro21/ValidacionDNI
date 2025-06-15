@@ -1,6 +1,26 @@
 [
   {
     "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "ListarTipoDocumento",
+    "RelativePath": "api/ValidacionDNI/listaTipoDocumento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ValidacionDNI_Backend.Models.TipoDocumentoLista",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
     "Method": "RegistrarDNI",
     "RelativePath": "api/ValidacionDNI/registrar",
     "HttpMethod": "POST",

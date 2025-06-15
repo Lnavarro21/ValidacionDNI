@@ -75,5 +75,60 @@ namespace ValidacionDNI_Backend.DataAccess
             return result;
         }
 
+        public async Task<TipoDocumentoLista> ListaDocumento()
+        {
+            TipoDocumentoLista result = new TipoDocumentoLista();
+            List<TipoDocumento> Lista = new List<TipoDocumento>();
+
+            try
+            {
+                using (SqlCommand oCmC = new SqlCommand())
+                {
+                    oCmC.CommandType = CommandType.StoredProcedure;
+                    oCmC.CommandText = "TipoDocumento_LST";
+
+                    oConn = await vgBDConeccion.AbrirModoLecturaAsync();
+                    oTran = await Task.Run<SqlTransaction>(() => oConn.BeginTransaction());
+                    oCmC.Connection = oTran.Connection;
+                    oCmC.Transaction = oTran;
+
+                    using (SqlDataReader oSqlR = await oCmC.ExecuteReaderAsync())
+                    {
+                        while (await oSqlR.ReadAsync())
+                        {
+                            var respuesta = new TipoDocumento()
+                            {                                
+                                IdDocumento = oSqlR["IdDocumento"] != DBNull.Value ? Convert.ToInt32(oSqlR["IdDocumento"]) : 0,
+                                Documento = oSqlR["Documento"] != DBNull.Value ? Convert.ToString(oSqlR["Documento"]) : string.Empty,
+                                NombreCortoDocumento = oSqlR["NombreCortoDocumento"] != DBNull.Value ? Convert.ToString(oSqlR["NombreCortoDocumento"]) : string.Empty,
+                            };
+                            Lista.Add(respuesta);
+                        }
+                    }
+                    oTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Contrucción de Salida
+                if (oTran != null)
+                {
+                    await Task.Run(() => oTran.Rollback());
+                }
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (oTran != null)
+                {
+                    await oTran.DisposeAsync();
+                    await oConn.DisposeAsync();
+                    vgBDConeccion.Dispose();
+                }
+            }
+            result.Lista = Lista;
+            return result;
+        }
+
     }
 }
