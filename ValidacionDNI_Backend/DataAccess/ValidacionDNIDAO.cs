@@ -130,5 +130,166 @@ namespace ValidacionDNI_Backend.DataAccess
             return result;
         }
 
+        public async Task<ModalidadTipoLista> ModalidadLista()
+        {
+            ModalidadTipoLista result = new ModalidadTipoLista();
+            List<ModalidadTipo> Lista = new List<ModalidadTipo>();
+
+            try
+            {
+                using (SqlCommand oCmC = new SqlCommand())
+                {
+                    oCmC.CommandType = CommandType.StoredProcedure;
+                    oCmC.CommandText = "Modalidad_LST";
+
+                    oConn = await vgBDConeccion.AbrirModoLecturaAsync();
+                    oTran = await Task.Run<SqlTransaction>(() => oConn.BeginTransaction());
+                    oCmC.Connection = oTran.Connection;
+                    oCmC.Transaction = oTran;
+
+                    using (SqlDataReader oSqlR = await oCmC.ExecuteReaderAsync())
+                    {
+                        while (await oSqlR.ReadAsync())
+                        {
+                            var respuesta = new ModalidadTipo()
+                            {
+                                IdModalidad = oSqlR["IdModalidad"] != DBNull.Value ? Convert.ToInt32(oSqlR["IdModalidad"]) : 0,
+                                Modalidad = oSqlR["Modalidad"] != DBNull.Value ? Convert.ToString(oSqlR["Modalidad"]) : string.Empty,
+                            };
+                            Lista.Add(respuesta);
+                        }
+                    }
+                    oTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Contrucción de Salida
+                if (oTran != null)
+                {
+                    await Task.Run(() => oTran.Rollback());
+                }
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (oTran != null)
+                {
+                    await oTran.DisposeAsync();
+                    await oConn.DisposeAsync();
+                    vgBDConeccion.Dispose();
+                }
+            }
+            result.Lista = Lista;
+            return result;
+        }
+
+        public async Task<SedesLista> SedeLista()
+        {
+            SedesLista result = new SedesLista();
+            List<Sedes> Lista = new List<Sedes>();
+
+            try
+            {
+                using (SqlCommand oCmC = new SqlCommand())
+                {
+                    oCmC.CommandType = CommandType.StoredProcedure;
+                    oCmC.CommandText = "Sede_LST";
+
+                    oConn = await vgBDConeccion.AbrirModoLecturaAsync();
+                    oTran = await Task.Run<SqlTransaction>(() => oConn.BeginTransaction());
+                    oCmC.Connection = oTran.Connection;
+                    oCmC.Transaction = oTran;
+
+                    using (SqlDataReader oSqlR = await oCmC.ExecuteReaderAsync())
+                    {
+                        while (await oSqlR.ReadAsync())
+                        {
+                            var respuesta = new Sedes()
+                            {
+                                IdSede = oSqlR["IdSede"] != DBNull.Value ? Convert.ToInt32(oSqlR["IdSede"]) : 0,
+                                Sede = oSqlR["NombreSede"] != DBNull.Value ? Convert.ToString(oSqlR["NombreSede"]) : string.Empty,
+                            };
+                            Lista.Add(respuesta);
+                        }
+                    }
+                    oTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Contrucción de Salida
+                if (oTran != null)
+                {
+                    await Task.Run(() => oTran.Rollback());
+                }
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (oTran != null)
+                {
+                    await oTran.DisposeAsync();
+                    await oConn.DisposeAsync();
+                    vgBDConeccion.Dispose();
+                }
+            }
+            result.Lista = Lista;
+            return result;
+        }
+
+        public async Task<EscuelasLista> EscuelaLista()
+        {
+            EscuelasLista result = new EscuelasLista();
+            List<Escuelas> Lista = new List<Escuelas>();
+
+            try
+            {
+                using (SqlCommand oCmC = new SqlCommand())
+                {
+                    oCmC.CommandType = CommandType.StoredProcedure;
+                    oCmC.CommandText = "Escuela_LST";
+
+                    oConn = await vgBDConeccion.AbrirModoLecturaAsync();
+                    oTran = await Task.Run<SqlTransaction>(() => oConn.BeginTransaction());
+                    oCmC.Connection = oTran.Connection;
+                    oCmC.Transaction = oTran;
+
+                    using (SqlDataReader oSqlR = await oCmC.ExecuteReaderAsync())
+                    {
+                        while (await oSqlR.ReadAsync())
+                        {
+                            var respuesta = new Escuelas()
+                            {
+                                IdEscuela = oSqlR["IdEscuela"] != DBNull.Value ? Convert.ToInt32(oSqlR["IdEscuela"]) : 0,
+                                Escuela = oSqlR["NombreEscuela"] != DBNull.Value ? Convert.ToString(oSqlR["NombreEscuela"]) : string.Empty,
+                            };
+                            Lista.Add(respuesta);
+                        }
+                    }
+                    oTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Contrucción de Salida
+                if (oTran != null)
+                {
+                    await Task.Run(() => oTran.Rollback());
+                }
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (oTran != null)
+                {
+                    await oTran.DisposeAsync();
+                    await oConn.DisposeAsync();
+                    vgBDConeccion.Dispose();
+                }
+            }
+            result.Lista = Lista;
+            return result;
+        }
     }
 }

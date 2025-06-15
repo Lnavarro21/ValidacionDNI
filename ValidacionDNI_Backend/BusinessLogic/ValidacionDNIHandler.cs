@@ -50,5 +50,57 @@ namespace ValidacionDNI_Backend.BusinessLogic
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<ModalidadTipoLista> ModalidadListaAsync()
+        {
+            try
+            {
+
+                ModalidadTipoLista Respuesta = null;
+
+                Respuesta = await vgDataAccess.ModalidadLista();
+
+                return Respuesta;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public async Task<SedesLista> SedeListaAsync()
+        {
+            try
+            {
+
+                SedesLista Respuesta = null;
+
+                Respuesta = await vgDataAccess.SedeLista();
+
+                return Respuesta;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public async Task<EscuelasLista> EscuelaListaAsync()
+        {
+            try
+            {
+
+                EscuelasLista Respuesta = null;
+
+                Respuesta = await vgDataAccess.EscuelaLista();
+
+                return Respuesta;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

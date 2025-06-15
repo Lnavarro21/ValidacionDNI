@@ -67,5 +67,50 @@ namespace ValidacionDNI_Backend.Controllers
             }
         }
 
+        [HttpGet("listaModalidad")]
+        public async Task<ActionResult<ModalidadTipoLista>> ListarModalidad()
+        {
+            try
+            {
+                var resultado = await vgDataAccess.ModalidadListaAsync();
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al listar tipo de documento");
+                return StatusCode(500, "Ocurrió un error interno al procesar la solicitud.");
+            }
+        }
+
+        [HttpGet("listaSede")]
+        public async Task<ActionResult<SedesLista>> ListarSede()
+        {
+            try
+            {
+                var resultado = await vgDataAccess.SedeListaAsync();
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al listar sedes");
+                return StatusCode(500, "Ocurrió un error interno al procesar la solicitud.");
+            }
+        }
+
+        [HttpGet("listaEscuela")]
+        public async Task<ActionResult<EscuelasLista>> ListarEscuela()
+        {
+            try
+            {
+                var resultado = await vgDataAccess.EscuelaListaAsync();
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al listar tipo de escuela");
+                return StatusCode(500, "Ocurrió un error interno al procesar la solicitud.");
+            }
+        }
+
     }
 }

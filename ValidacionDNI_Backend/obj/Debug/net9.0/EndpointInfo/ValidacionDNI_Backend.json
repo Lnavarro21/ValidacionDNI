@@ -64,14 +64,159 @@
           }
         }
       }
+    },
+    "/api/ValidacionDNI/listaModalidad": {
+      "get": {
+        "tags": [
+          "ValidacionDNI"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModalidadTipoLista"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModalidadTipoLista"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ModalidadTipoLista"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ValidacionDNI/listaSede": {
+      "get": {
+        "tags": [
+          "ValidacionDNI"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SedesLista"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SedesLista"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SedesLista"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ValidacionDNI/listaEscuela": {
+      "get": {
+        "tags": [
+          "ValidacionDNI"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EscuelasLista"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EscuelasLista"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EscuelasLista"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Escuelas": {
+        "type": "object",
+        "properties": {
+          "idEscuela": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "escuela": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EscuelasLista": {
+        "type": "object",
+        "properties": {
+          "lista": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Escuelas"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModalidadTipo": {
+        "type": "object",
+        "properties": {
+          "idModalidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "modalidad": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModalidadTipoLista": {
+        "type": "object",
+        "properties": {
+          "lista": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModalidadTipo"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "PostulanteDTO": {
         "type": "object",
         "properties": {
-          "dni": {
+          "idTipoDocumento": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "documento": {
             "type": "string",
             "nullable": true
           },
@@ -93,6 +238,33 @@
           },
           "celular": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Sedes": {
+        "type": "object",
+        "properties": {
+          "idSede": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sede": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SedesLista": {
+        "type": "object",
+        "properties": {
+          "lista": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Sedes"
+            },
             "nullable": true
           }
         },

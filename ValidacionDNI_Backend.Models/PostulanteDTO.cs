@@ -28,4 +28,34 @@ namespace ValidacionDNI_Backend.Models
         public string NombreCortoDocumento { get; set; }
     }
 
+    public class ModalidadTipo
+    {
+        public int IdModalidad { get; set; }
+        public string Modalidad { get; set; }
+    }
+
+    public class ModalidadTipoLista
+    {
+        public List<ModalidadTipo> Lista { get; set; }
+    }
+
+    public class Sedes
+    {
+        public int IdSede { get; set; }
+        public string Sede { get; set; }
+    }
+    public class SedesLista
+    {
+        public List<Sedes> Lista { get; set; }
+    }
+
+    public class Escuelas
+    {
+        public int IdEscuela { get; set; }
+        public string Escuela { get; set; }
+    }
+    public class EscuelasLista
+    {
+        public List<Escuelas> Lista { get; set; }
+    }
 }

@@ -1,6 +1,66 @@
 [
   {
     "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "ListarEscuela",
+    "RelativePath": "api/ValidacionDNI/listaEscuela",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ValidacionDNI_Backend.Models.EscuelasLista",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "ListarModalidad",
+    "RelativePath": "api/ValidacionDNI/listaModalidad",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ValidacionDNI_Backend.Models.ModalidadTipoLista",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "ListarSede",
+    "RelativePath": "api/ValidacionDNI/listaSede",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "ValidacionDNI_Backend.Models.SedesLista",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
     "Method": "ListarTipoDocumento",
     "RelativePath": "api/ValidacionDNI/listaTipoDocumento",
     "HttpMethod": "GET",
