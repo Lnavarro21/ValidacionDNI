@@ -1,0 +1,6 @@
+@ValidacionDNI_Backend_HostAddress = http://localhost:5101
+
+GET {{ValidacionDNI_Backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

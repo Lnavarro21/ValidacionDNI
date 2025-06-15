@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "RegistrarDNI",
+    "RelativePath": "api/ValidacionDNI/registrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postulante",
+        "Type": "ValidacionDNI_Backend.Models.PostulanteDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
