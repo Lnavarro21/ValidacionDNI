@@ -8,7 +8,8 @@ namespace ValidacionDNI_Backend.Models
 {
     public class PostulanteDTO
     {
-        public string DNI { get; set; }
+        public int IdTipoDocumento { get; set; }
+        public string Documento { get; set; }
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public string Nombres { get; set; }

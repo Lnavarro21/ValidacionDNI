@@ -26,8 +26,8 @@ namespace ValidacionDNI_Backend.DataAccess
                 {
                     oCmC.CommandType = CommandType.StoredProcedure;
                     oCmC.CommandText = "Postulante_INS";
-
-                    oCmC.Parameters.AddWithValue("@vchDNI", postulante.DNI);
+                    oCmC.Parameters.AddWithValue("@intIdTipoDocumento", postulante.IdTipoDocumento);
+                    oCmC.Parameters.AddWithValue("@vchDocumento", postulante.Documento);
                     oCmC.Parameters.AddWithValue("@vchApellidoPaterno", postulante.ApellidoPaterno);
                     oCmC.Parameters.AddWithValue("@vchApellidoMaterno", postulante.ApellidoMaterno);
                     oCmC.Parameters.AddWithValue("@vchNombres", postulante.Nombres);
