@@ -10,9 +10,6 @@ using iText.Kernel.Font;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using System.IO;
-using System.Threading.Tasks;
-using System;
 using iText.IO.Image;
 using iText.Layout.Borders;
 namespace ValidacionDNI_Backend.BusinessLogic
