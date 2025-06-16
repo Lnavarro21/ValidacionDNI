@@ -72,4 +72,34 @@ namespace ValidacionDNI_Backend.Models
         public int IdModalidad { get; set; }
     }
 
+    public class CompletarRegistroDTO
+    {
+        public int IdPostulante {  get; set; }       
+        public int IdGenero { get; set; }
+        public DateTime FechaNacimiento { get; set; }
+        public string Direccion { get; set; }
+        public string Colegio3 { get; set; }
+        public string Colegio4 { get; set; }
+        public string Colegio5 { get; set; }
+        public int IdModalidad { get; set; }
+        public int IdSede { get; set; }
+        public int IdFacultad { get; set; }
+        public int IdEscuela { get; set; }
+    }
+
+    public class DatosPostulante
+    {
+        public int IdPostulante { get; set; }
+        public string TipoDocumento { get; set; }
+        public string Documento { get; set; }
+        public string Nombres { get; set; }
+        public string ApellidoPaterno { get; set; }
+        public string ApellidoMaterno { get; set; }
+        public string Email { get; set; }
+        public string Celular { get; set; }
+        public string Modalidad {  get; set; }
+        public string Sede {  get; set; }
+        public string Escuela { get; set; }
+    }
+
 }

@@ -182,10 +182,134 @@
           }
         }
       }
+    },
+    "/api/ValidacionDNI/opcion1": {
+      "post": {
+        "tags": [
+          "ValidacionDNI"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Opcion1DTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Opcion1DTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Opcion1DTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ValidacionDNI/completarregistro": {
+      "post": {
+        "tags": [
+          "ValidacionDNI"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompletarRegistroDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompletarRegistroDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompletarRegistroDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ValidacionDNI/postulanteSel": {
+      "get": {
+        "tags": [
+          "ValidacionDNI"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "CompletarRegistroDTO": {
+        "type": "object",
+        "properties": {
+          "idPostulante": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idGenero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaNacimiento": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "direccion": {
+            "type": "string",
+            "nullable": true
+          },
+          "colegio3": {
+            "type": "string",
+            "nullable": true
+          },
+          "colegio4": {
+            "type": "string",
+            "nullable": true
+          },
+          "colegio5": {
+            "type": "string",
+            "nullable": true
+          },
+          "idModalidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idSede": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idFacultad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idEscuela": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "Escuelas": {
         "type": "object",
         "properties": {
@@ -236,6 +360,28 @@
               "$ref": "#/components/schemas/ModalidadTipo"
             },
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Opcion1DTO": {
+        "type": "object",
+        "properties": {
+          "documento": {
+            "type": "string",
+            "nullable": true
+          },
+          "idSede": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idEscuela": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idModalidad": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

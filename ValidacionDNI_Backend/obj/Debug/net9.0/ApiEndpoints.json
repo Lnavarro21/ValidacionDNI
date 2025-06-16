@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "CompletarRegistro",
+    "RelativePath": "api/ValidacionDNI/completarregistro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "opcion",
+        "Type": "ValidacionDNI_Backend.Models.CompletarRegistroDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
     "Method": "GenerarRecibo",
     "RelativePath": "api/ValidacionDNI/generarPDF",
     "HttpMethod": "POST",
@@ -94,6 +110,32 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "RegistrarOpcion1",
+    "RelativePath": "api/ValidacionDNI/opcion1",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "opcion",
+        "Type": "ValidacionDNI_Backend.Models.Opcion1DTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "Postulante",
+    "RelativePath": "api/ValidacionDNI/postulanteSel",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",

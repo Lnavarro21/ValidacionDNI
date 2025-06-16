@@ -237,5 +237,41 @@ namespace ValidacionDNI_Backend.BusinessLogic
             }
         }
 
+        public async Task<MensajeRespuesta> CompletarRegistroAsync(CompletarRegistroDTO opcion)
+        {
+            try
+            {
+
+                MensajeRespuesta Respuesta = null;
+
+                Respuesta = await vgDataAccess.CompletarRegistro(opcion);
+
+                return Respuesta;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<DatosPostulante> PostulanteAsync()
+        {
+            try
+            {
+
+                DatosPostulante Respuesta = null;
+
+                Respuesta = await vgDataAccess.Postulante();
+
+                return Respuesta;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }
