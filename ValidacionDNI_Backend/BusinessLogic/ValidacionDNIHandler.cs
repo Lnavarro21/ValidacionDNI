@@ -272,6 +272,23 @@ namespace ValidacionDNI_Backend.BusinessLogic
                 throw new Exception(ex.Message);
             }
         }
+        public async Task<LogPostulante> PostulanteLoginAsync(string Documento)
+        {
+            try
+            {
+
+                LogPostulante Respuesta = null;
+
+                Respuesta = await vgDataAccess.PostulanteLogin(Documento);
+
+                return Respuesta;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
     }
 }

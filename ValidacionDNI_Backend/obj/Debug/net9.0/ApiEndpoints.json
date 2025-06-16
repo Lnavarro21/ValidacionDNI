@@ -129,12 +129,34 @@
   },
   {
     "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "PostulanteLog",
+    "RelativePath": "api/ValidacionDNI/postulanteLogin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postulante",
+        "Type": "ValidacionDNI_Backend.Models.LogPostulanteDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
     "Method": "Postulante",
     "RelativePath": "api/ValidacionDNI/postulanteSel",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "IdPostulante",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

@@ -102,4 +102,12 @@ namespace ValidacionDNI_Backend.Models
         public string Escuela { get; set; }
     }
 
+    public class LogPostulanteDTO
+    {
+        public string Documento { get; set; }
+    }
+    public class LogPostulante
+    {
+        public int IdPostulante { get; set; }
+    }
 }

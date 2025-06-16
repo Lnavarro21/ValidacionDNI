@@ -470,5 +470,55 @@ namespace ValidacionDNI_Backend.DataAccess
             }
             return result;
         }
+
+        public async Task<LogPostulante> PostulanteLogin(string Documento)
+        {
+            var result = new LogPostulante();
+
+            try
+            {
+                using (SqlCommand oCmC = new SqlCommand())
+                {
+                    oCmC.CommandType = CommandType.StoredProcedure;
+                    oCmC.CommandText = "Autenticacion";
+                    oCmC.Parameters.AddWithValue("@vchDocumento", Documento);
+
+                    oConn = await vgBDConeccion.AbrirModoLecturaAsync();
+                    oTran = await Task.Run<SqlTransaction>(() => oConn.BeginTransaction());
+                    oCmC.Connection = oTran.Connection;
+                    oCmC.Transaction = oTran;
+                    using (SqlDataReader oSqlR = await oCmC.ExecuteReaderAsync())
+                    {
+                        while (await oSqlR.ReadAsync())
+                        {
+                            result = new LogPostulante()
+                            {
+                                IdPostulante = oSqlR["IdPostulante"] != DBNull.Value ? Convert.ToInt32(oSqlR["IdPostulante"]) : 0,
+                            };
+                        }
+                    }
+                    oTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Contrucción de Salida
+                if (oTran != null)
+                {
+                    await Task.Run(() => oTran.Rollback());
+                }
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (oTran != null)
+                {
+                    await oTran.DisposeAsync();
+                    await oConn.DisposeAsync();
+                    vgBDConeccion.Dispose();
+                }
+            }
+            return result;
+        }
     }
 }

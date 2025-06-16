@@ -189,5 +189,27 @@ namespace ValidacionDNI_Backend.Controllers
                 return StatusCode(500, new { IdTipoMensaje = 1, Message = ex.Message });
             }
         }
+        [HttpGet("postulanteLogin")]
+        public IActionResult PostulanteLog(LogPostulanteDTO postulante)
+        {
+            try
+            {
+                var resultado = vgDataAccess.PostulanteLoginAsync(postulante.Documento).Result;
+
+                if (resultado != null)
+                {
+                    _logger.LogInformation("Datos Registrados");
+                    return Ok(resultado);
+                }
+
+                return BadRequest("No se pudo realizar el registro");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(500, new { IdTipoMensaje = 1, Message = ex.Message });
+            }
+        }
+
     }
 }
