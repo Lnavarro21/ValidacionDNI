@@ -169,11 +169,11 @@ namespace ValidacionDNI_Backend.Controllers
         }
 
         [HttpGet("postulanteSel")]
-        public IActionResult Postulante()
+        public IActionResult Postulante([FromQuery] int IdPostulante)
         {
             try
             {
-                var resultado = vgDataAccess.PostulanteAsync().Result;
+                var resultado = vgDataAccess.PostulanteAsync(IdPostulante).Result;
 
                 if (resultado != null)
                 {

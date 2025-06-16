@@ -411,7 +411,7 @@ namespace ValidacionDNI_Backend.DataAccess
             return result;
         }
 
-        public async Task<DatosPostulante> Postulante()
+        public async Task<DatosPostulante> Postulante(int IdPostulante)
         {
             var result = new DatosPostulante();
 
@@ -421,6 +421,7 @@ namespace ValidacionDNI_Backend.DataAccess
                 {
                     oCmC.CommandType = CommandType.StoredProcedure;
                     oCmC.CommandText = "Postulante_SEL";
+                    oCmC.Parameters.AddWithValue("@intIdPostulante", IdPostulante);
 
                     oConn = await vgBDConeccion.AbrirModoLecturaAsync();
                     oTran = await Task.Run<SqlTransaction>(() => oConn.BeginTransaction());

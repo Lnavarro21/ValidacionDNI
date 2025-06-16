@@ -255,14 +255,14 @@ namespace ValidacionDNI_Backend.BusinessLogic
             }
         }
 
-        public async Task<DatosPostulante> PostulanteAsync()
+        public async Task<DatosPostulante> PostulanteAsync(int IdPostulante)
         {
             try
             {
 
                 DatosPostulante Respuesta = null;
 
-                Respuesta = await vgDataAccess.Postulante();
+                Respuesta = await vgDataAccess.Postulante(IdPostulante);
 
                 return Respuesta;
 
