@@ -201,15 +201,16 @@ namespace ValidacionDNI_Backend.BusinessLogic
             table.AddHeaderCell(new Cell().Add(new Paragraph("Monto").SetFont(fontNormal)));
 
             table.AddCell(new Cell().Add(new Paragraph("00000").SetFont(fontNormal)));
-            table.AddCell(new Cell().Add(new Paragraph(data.Concepto).SetFont(fontNormal)));
+            table.AddCell(new Cell().Add(new Paragraph("Examen de Admisión").SetFont(fontNormal)));
             table.AddCell(new Cell().Add(new Paragraph("350.0").SetFont(fontNormal)));
 
-            table.AddCell(new Cell(1, 2).Add(new Paragraph("TOTAL").SetFont(fontNormal)));
+            table.AddCell(new Cell().Add(new Paragraph("").SetFont(fontNormal)));
+            table.AddCell(new Cell().Add(new Paragraph("TOTAL").SetFont(fontNormal)));
             table.AddCell(new Cell().Add(new Paragraph("S/ 350.0").SetFont(fontNormal)));
             document.Add(table);
 
             document.Add(new Paragraph("Local: WEB")
-                .SetFont(fontNormal).SetFontSize(9).SetTextAlignment(TextAlignment.CENTER).SetMarginTop(10));
+                .SetFont(fontNormal).SetFontSize(10).SetTextAlignment(TextAlignment.CENTER).SetMarginTop(10));
 
             // Código de barras (mock - si usas datos reales, usa Barcode128)
             var barcode = new iText.Barcodes.Barcode128(pdf);

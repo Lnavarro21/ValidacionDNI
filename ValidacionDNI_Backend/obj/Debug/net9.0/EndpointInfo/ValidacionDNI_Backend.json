@@ -280,22 +280,6 @@
           "numeroDocumento": {
             "type": "string",
             "nullable": true
-          },
-          "nombres": {
-            "type": "string",
-            "nullable": true
-          },
-          "apellidoPaterno": {
-            "type": "string",
-            "nullable": true
-          },
-          "apellidoMaterno": {
-            "type": "string",
-            "nullable": true
-          },
-          "concepto": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
