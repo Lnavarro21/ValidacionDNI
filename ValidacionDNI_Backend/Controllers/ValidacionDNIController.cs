@@ -190,11 +190,11 @@ namespace ValidacionDNI_Backend.Controllers
             }
         }
         [HttpGet("postulanteLogin")]
-        public IActionResult PostulanteLog(LogPostulanteDTO postulante)
+        public IActionResult PostulanteLog([FromQuery] string Documento)
         {
             try
             {
-                var resultado = vgDataAccess.PostulanteLoginAsync(postulante.Documento).Result;
+                var resultado = vgDataAccess.PostulanteLoginAsync(Documento).Result;
 
                 if (resultado != null)
                 {
