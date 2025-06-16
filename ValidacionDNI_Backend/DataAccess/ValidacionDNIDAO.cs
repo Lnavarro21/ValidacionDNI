@@ -291,5 +291,61 @@ namespace ValidacionDNI_Backend.DataAccess
             result.Lista = Lista;
             return result;
         }
+
+        public async Task<MensajeRespuesta> RegistrarOpcion1(Opcion1DTO opcion)
+        {
+            var result = new MensajeRespuesta();
+
+            try
+            {
+                using (SqlCommand oCmC = new SqlCommand())
+                {
+                    oCmC.CommandType = CommandType.StoredProcedure;
+                    oCmC.CommandText = "PostulanteSedeEscuela_INS";
+                    oCmC.Parameters.AddWithValue("@vchDocumento", opcion.Documento);
+                    oCmC.Parameters.AddWithValue("@intIdSede", opcion.IdSede);
+                    oCmC.Parameters.AddWithValue("@intIdEscuela", opcion.IdEscuela);
+                    oCmC.Parameters.AddWithValue("@intIdModalidad", opcion.IdModalidad);
+
+
+                    oConn = await vgBDConeccion.AbrirModoLecturaAsync();
+                    oTran = await Task.Run<SqlTransaction>(() => oConn.BeginTransaction());
+                    oCmC.Connection = oTran.Connection;
+                    oCmC.Transaction = oTran;
+                    using (SqlDataReader oSqlR = await oCmC.ExecuteReaderAsync())
+                    {
+                        while (await oSqlR.ReadAsync())
+                        {
+                            result = new MensajeRespuesta()
+                            {
+                                Mensaje = oSqlR["Mensaje"] != DBNull.Value ? Convert.ToString(oSqlR["Mensaje"]) : string.Empty,
+                                IdMensaje = oSqlR["IdMensaje"] != DBNull.Value ? Convert.ToInt32(oSqlR["IdMensaje"]) : 0,
+                                IdTipoMensaje = oSqlR["TipoMensaje"] != DBNull.Value ? Convert.ToInt32(oSqlR["TipoMensaje"]) : 0,
+                            };
+                        }
+                    }
+                    oTran.Commit();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Contrucción de Salida
+                if (oTran != null)
+                {
+                    await Task.Run(() => oTran.Rollback());
+                }
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if (oTran != null)
+                {
+                    await oTran.DisposeAsync();
+                    await oConn.DisposeAsync();
+                    vgBDConeccion.Dispose();
+                }
+            }
+            return result;
+        }
     }
 }

@@ -58,9 +58,18 @@ namespace ValidacionDNI_Backend.Models
     {
         public List<Escuelas> Lista { get; set; }
     }
-        public class ReciboRequest
-        {
-            public string NumeroDocumento { get; set; }
+    public class ReciboRequest
+    {
+        public string NumeroDocumento { get; set; }
 
-        }
+    }
+
+    public class Opcion1DTO
+    {
+        public string Documento { get; set; }
+        public int IdSede { get; set; }
+        public int IdEscuela { get; set; }
+        public int IdModalidad { get; set; }
+    }
+
 }

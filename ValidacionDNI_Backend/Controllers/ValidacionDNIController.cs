@@ -124,5 +124,26 @@ namespace ValidacionDNI_Backend.Controllers
             return File(pdfBytes, "application/pdf", fileName);
         }
 
+        [HttpPost("opcion1")]
+        public IActionResult RegistrarOpcion1([FromBody] Opcion1DTO opcion)
+        {
+            try
+            {
+                var resultado = vgDataAccess.RegistrarOpcion1Async(opcion).Result;
+
+                if (resultado != null)
+                {
+                    _logger.LogInformation("Datos Registrados");
+                    return Ok(new { resultado.Mensaje, IdTipoMensaje = resultado.IdTipoMensaje });
+                }
+
+                return BadRequest("No se pudo realizar el registro");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return StatusCode(500, new { IdTipoMensaje = 1, Message = ex.Message });
+            }
+        }
     }
 }

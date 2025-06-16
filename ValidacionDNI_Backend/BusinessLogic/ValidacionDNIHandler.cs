@@ -219,5 +219,23 @@ namespace ValidacionDNI_Backend.BusinessLogic
             return stream.ToArray();
         }
 
+        public async Task<MensajeRespuesta> RegistrarOpcion1Async(Opcion1DTO opcion)
+        {
+            try
+            {
+
+                MensajeRespuesta Respuesta = null;
+
+                Respuesta = await vgDataAccess.RegistrarOpcion1(opcion);
+
+                return Respuesta;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }
