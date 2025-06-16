@@ -2,7 +2,7 @@
   {
     "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
     "Method": "GenerarRecibo",
-    "RelativePath": "api/ValidacionDNI/generar",
+    "RelativePath": "api/ValidacionDNI/generarPDF",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

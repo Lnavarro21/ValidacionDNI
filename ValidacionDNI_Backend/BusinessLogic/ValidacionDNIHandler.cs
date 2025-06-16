@@ -10,6 +10,11 @@ using iText.Kernel.Font;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.IO;
+using System.Threading.Tasks;
+using System;
+using iText.IO.Image;
+using iText.Layout.Borders;
 namespace ValidacionDNI_Backend.BusinessLogic
 {
     public class ValidacionDNIHandler
@@ -119,31 +124,102 @@ namespace ValidacionDNI_Backend.BusinessLogic
             var pdf = new PdfDocument(writer);
             var document = new Document(pdf);
 
-            var font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+            var fontBold = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
             var fontNormal = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
-            document.Add(new Paragraph("UNIVERSIDAD DE SAN MARTIN DE PORRES").SetFont(font).SetFontSize(14));
-            document.Add(new Paragraph("R.U.C. 20138149022").SetFont(fontNormal));
-            document.Add(new Paragraph("AV. CIRCUNVAL.CL.GF. LOS INCAS NRO 154 LIMA – LIMA – SANTIAGO DE SURCO").SetFont(fontNormal).SetMarginBottom(15));
+            // Logo
+            var logoUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcmB6wzZVYIYWcH9QVOF5N6uWk2C8x6ydCrw&s";
+            using var client = new HttpClient();
+            var imgBytes = await client.GetByteArrayAsync(logoUrl);
+            var imgData = iText.IO.Image.ImageDataFactory.Create(imgBytes);
+            var logo = new iText.Layout.Element.Image(imgData).SetHorizontalAlignment(HorizontalAlignment.CENTER).ScaleToFit(200, 200);
+            document.Add(logo);
 
-            document.Add(new Paragraph("RECIBO").SetFont(font).SetFontSize(12).SetTextAlignment(TextAlignment.CENTER).SetMarginBottom(10));
+            // Título
+            document.Add(new Paragraph("\nUNIVERSIDAD DE SAN MARTIN DE PORRES")
+                .SetFont(fontBold).SetFontSize(12).SetTextAlignment(TextAlignment.CENTER));
+            document.Add(new Paragraph("R.U.C. 20138149022")
+                .SetFont(fontNormal).SetTextAlignment(TextAlignment.CENTER));
+            document.Add(new Paragraph("AV. CIRCUNVAL.CL.GF. LOS INCAS NRO 154 LIMA – LIMA – SANTIAGO DE SURCO")
+                .SetFont(fontNormal).SetFontSize(9).SetTextAlignment(TextAlignment.CENTER));
 
-            document.Add(new Paragraph($"NÚMERO DE MATRÍCULA: 0000{data.NumeroDocumento}"));
-            document.Add(new Paragraph($"NOMBRES: {data.Nombres}"));
-            document.Add(new Paragraph($"APELLIDO PATERNO: {data.ApellidoPaterno}"));
-            document.Add(new Paragraph($"APELLIDO MATERNO: {data.ApellidoMaterno}"));
-            document.Add(new Paragraph($"CONCEPTO: {data.Concepto}"));
-            document.Add(new Paragraph($"MONTO: S/ 350.00"));
-            document.Add(new Paragraph($"FECHA DE VENCIMIENTO: {DateTime.Now.AddMonths(1):d/M/yyyy}"));
-            document.Add(new Paragraph("FACULTAD: ---"));
-            document.Add(new Paragraph("ESCUELA: ---"));
-            document.Add(new Paragraph("PROGRAMA: ---"));
+            document.Add(new Paragraph($"Facultad: ---\n\nEscuela: ---\n\nPrograma: ---")
+                .SetFont(fontNormal).SetFontSize(9).SetTextAlignment(TextAlignment.CENTER));
 
-            document.Add(new Paragraph("\nLos datos ingresados en el formulario, le deben pertenecer única y exclusivamente al postulante. Si los datos ingresados no pertenecen al postulante, corregirlos, caso contrario ignore este mensaje").SetFont(fontNormal).SetFontSize(9));
-            document.Add(new Paragraph("\n¿Estás seguro de generar el recibo con los siguientes datos?").SetFont(fontNormal));
+            document.Add(new Paragraph("RECIBO")
+                .SetFont(fontNormal).SetFontSize(11).SetTextAlignment(TextAlignment.CENTER).SetMarginTop(10));
+
+            document.Add(new Paragraph("CÓDIGO CLIENTE")
+                .SetFont(fontNormal).SetTextAlignment(TextAlignment.CENTER));
+            document.Add(new Paragraph($"{data.NumeroDocumento}")
+                .SetFont(fontNormal).SetTextAlignment(TextAlignment.CENTER));
+
+            var now = DateTime.Now;
+            var vencimiento = now.AddMonths(1);
+
+            var fechaHoraTable = new Table(UnitValue.CreatePercentArray(new float[] { 1.5f, 1.5f, 1.5f, 1.5f }))
+             .SetWidth(UnitValue.CreatePercentValue(80))
+             .SetHorizontalAlignment(HorizontalAlignment.CENTER)
+             .SetBorder(Border.NO_BORDER)
+             .SetMarginBottom(10);
+
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("Fecha:").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph($"{now:dd/MM/yyyy}").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("INTERBANK").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("Hora:").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph($"{now:HH:mm:ss}").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("CRÉDITO:").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("Fecha Ven:").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph($"{vencimiento:dd/MM/yyyy}").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("CONTINENTAL:").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("").SetFont(fontNormal)).SetBorder(Border.NO_BORDER));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("")).SetBorder(Border.NO_BORDER));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("BIF:").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("").SetFont(fontNormal)).SetBorder(Border.NO_BORDER));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("")).SetBorder(Border.NO_BORDER));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("SCOTIABANK:").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+            fechaHoraTable.AddCell(new Cell().Add(new Paragraph("").SetFont(fontNormal).SetFontSize(9)).SetBorder(Border.NO_BORDER).SetTextAlignment(TextAlignment.LEFT));
+
+            document.Add(fechaHoraTable);
+
+
+            // Tabla de concepto
+            var table = new Table(new float[] { 1, 3, 1 })
+                .SetWidth(350);
+            table.SetHorizontalAlignment(HorizontalAlignment.CENTER);
+            table.SetFontSize(10);
+            table.AddHeaderCell(new Cell().Add(new Paragraph("Semestre").SetFont(fontNormal)));
+            table.AddHeaderCell(new Cell().Add(new Paragraph("Concepto/Descripción").SetFont(fontNormal)));
+            table.AddHeaderCell(new Cell().Add(new Paragraph("Monto").SetFont(fontNormal)));
+
+            table.AddCell(new Cell().Add(new Paragraph("00000").SetFont(fontNormal)));
+            table.AddCell(new Cell().Add(new Paragraph(data.Concepto).SetFont(fontNormal)));
+            table.AddCell(new Cell().Add(new Paragraph("350.0").SetFont(fontNormal)));
+
+            table.AddCell(new Cell(1, 2).Add(new Paragraph("TOTAL").SetFont(fontNormal)));
+            table.AddCell(new Cell().Add(new Paragraph("S/ 350.0").SetFont(fontNormal)));
+            document.Add(table);
+
+            document.Add(new Paragraph("Local: WEB")
+                .SetFont(fontNormal).SetFontSize(9).SetTextAlignment(TextAlignment.CENTER).SetMarginTop(10));
+
+            // Código de barras (mock - si usas datos reales, usa Barcode128)
+            var barcode = new iText.Barcodes.Barcode128(pdf);
+            barcode.SetCodeType(iText.Barcodes.Barcode128.CODE128);
+            var barcodeImage = new iText.Layout.Element.Image(barcode.CreateFormXObject(pdf)).SetWidth(150).SetHeight(50).SetHorizontalAlignment(HorizontalAlignment.CENTER);
+            document.Add(barcodeImage);
 
             document.Close();
             return stream.ToArray();
         }
+
     }
 }
