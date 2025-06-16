@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
+    "Method": "GenerarRecibo",
+    "RelativePath": "api/ValidacionDNI/generar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "ValidacionDNI_Backend.Models.ReciboRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValidacionDNI_Backend.Controllers.ValidacionDNIController",
     "Method": "ListarEscuela",
     "RelativePath": "api/ValidacionDNI/listaEscuela",
     "HttpMethod": "GET",

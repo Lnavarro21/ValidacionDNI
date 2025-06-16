@@ -3,14 +3,17 @@ using ValidacionDNI_Backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Routing;
+using System.Reflection.Metadata;
 namespace ValidacionDNI_Backend.Controllers
 {
     [Route("api/[controller]")]
@@ -110,6 +113,15 @@ namespace ValidacionDNI_Backend.Controllers
                 _logger.LogError(ex, "Error al listar tipo de escuela");
                 return StatusCode(500, "Ocurrió un error interno al procesar la solicitud.");
             }
+        }
+
+        [HttpPost("generarPDF")]
+        public async Task<IActionResult> GenerarRecibo([FromBody] ReciboRequest request)
+        {
+            var pdfBytes = await vgDataAccess.GenerarReciboPDFAsync(request);
+
+            var fileName = $"Recibo_{DateTime.Now:yyyyMMdd_HHmm}.pdf";
+            return File(pdfBytes, "application/pdf", fileName);
         }
 
     }
