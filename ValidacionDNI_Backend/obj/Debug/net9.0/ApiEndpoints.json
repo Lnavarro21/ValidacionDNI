@@ -136,9 +136,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "postulante",
-        "Type": "ValidacionDNI_Backend.Models.LogPostulanteDTO",
-        "IsRequired": true
+        "Name": "Documento",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

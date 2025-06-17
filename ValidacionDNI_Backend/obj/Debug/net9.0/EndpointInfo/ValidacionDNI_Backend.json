@@ -272,25 +272,15 @@
         "tags": [
           "ValidacionDNI"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogPostulanteDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogPostulanteDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LogPostulanteDTO"
-              }
+        "parameters": [
+          {
+            "name": "Documento",
+            "in": "query",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -373,16 +363,6 @@
             "items": {
               "$ref": "#/components/schemas/Escuelas"
             },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "LogPostulanteDTO": {
-        "type": "object",
-        "properties": {
-          "documento": {
-            "type": "string",
             "nullable": true
           }
         },

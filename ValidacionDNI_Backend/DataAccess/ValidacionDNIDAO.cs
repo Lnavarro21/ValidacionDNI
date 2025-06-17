@@ -320,7 +320,7 @@ namespace ValidacionDNI_Backend.DataAccess
                             {
                                 Mensaje = oSqlR["Mensaje"] != DBNull.Value ? Convert.ToString(oSqlR["Mensaje"]) : string.Empty,
                                 IdMensaje = oSqlR["IdMensaje"] != DBNull.Value ? Convert.ToInt32(oSqlR["IdMensaje"]) : 0,
-                                IdTipoMensaje = oSqlR["TipoMensaje"] != DBNull.Value ? Convert.ToInt32(oSqlR["TipoMensaje"]) : 0,
+                                IdTipoMensaje = oSqlR["IdTipoMensaje"] != DBNull.Value ? Convert.ToInt32(oSqlR["IdTipoMensaje"]) : 0,
                             };
                         }
                     }

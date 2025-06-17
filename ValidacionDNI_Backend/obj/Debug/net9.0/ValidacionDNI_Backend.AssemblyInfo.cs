@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ValidacionDNI_Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+09a4773c1fbc35802f2c05fb4353ef1b7e636145")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b1f71682e53f3f68ef91a17c4022cdbcb8cc1d90")]
 [assembly: System.Reflection.AssemblyProductAttribute("ValidacionDNI_Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ValidacionDNI_Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
